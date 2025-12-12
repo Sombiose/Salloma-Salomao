@@ -436,6 +436,79 @@
     
 }
 
+/* CSS para os botões de streaming */
+.streaming-links {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.spotify-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #1db954; /* Verde do Spotify */
+    color: white;
+    padding: 12px 20px;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(29, 185, 84, 0.3);
+}
+
+.spotify-btn:hover {
+    background: #1ed760;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(29, 185, 84, 0.4);
+    color: white;
+}
+
+.youtube-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #ff0000; /* Vermelho do YouTube */
+    color: white;
+    padding: 12px 20px;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+}
+
+.youtube-btn:hover {
+    background: #cc0000;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 0, 0, 0.4);
+    color: white;
+}
+
+.spotify-btn i,
+.youtube-btn i {
+    font-size: 1.2rem;
+}
+
+/* Responsividade */
+@media screen and (max-width: 768px) {
+    .streaming-links {
+        margin-top: 15px;
+        gap: 8px;
+    }
+    
+    .spotify-btn,
+    .youtube-btn {
+        padding: 10px 18px;
+        font-size: 0.85rem;
+    }
+}
+
 @media screen and (max-width: 768px) {
     #discografia {
         padding: 60px 5%;
