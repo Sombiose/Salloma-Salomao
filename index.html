@@ -1,0 +1,1828 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>Salloma Salomão</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        * {
+            font-family: "Poppins", sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #fafafa;
+            line-height: 1.6;
+        }
+
+        /* HEADER MINIMALISTA */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px 5%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        header.scrolled {
+            padding: 10px 5%;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        #navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        #nav_logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .logo-image {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+        }
+
+        #nav_list {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-item a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .nav-item a:hover {
+            color: #710000;
+        }
+
+        .nav-item a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #710000;
+            transition: width 0.3s ease;
+        }
+
+        .nav-item a:hover::after {
+            width: 100%;
+        }
+
+        /* Dropdown Styles */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-toggle {
+            cursor: pointer;
+        }
+
+        .dropdown-toggle i {
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown.active .dropdown-toggle i {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 280px;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 10px 0;
+            z-index: 1100;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: all 0.3s ease;
+            animation: fadeInDropdown 0.3s ease forwards;
+        }
+
+        .dropdown.active .dropdown-menu {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes fadeInDropdown {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .dropdown-menu li {
+            list-style: none;
+        }
+
+        .dropdown-menu li a {
+            display: block;
+            padding: 10px 20px;
+            color: #333;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            font-weight: 400;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: rgba(113, 0, 0, 0.1);
+            color: #710000;
+            transform: translateX(5px);
+        }
+
+        .dropdown-menu li a::after {
+            display: none;
+        }
+
+        .btn-contact {
+            background: #710000;
+            color: white;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 0%;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-contact:hover {
+            background: #500000;
+            transform: translateY(-2px);
+        }
+
+        #mobile_btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #333;
+            cursor: pointer;
+        }
+
+        /* SEÇÃO HERO - FOTO DE DESTAQUE */
+        #hero {
+            position: relative;
+            width: 100%;
+            height: 70vh;
+            overflow: hidden;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .hero-text-overlay {
+            position: relative;
+            z-index: 3;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 40px 60px;
+            margin-bottom: 40px;
+            text-align: center;
+            max-width: 800px;
+            width: 90%;
+        }
+
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1));
+            z-index: 2;
+        }
+
+        .social-media {
+            position: absolute;
+            top: 50%;
+            right: 40px;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            z-index: 4;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #710000;
+            text-decoration: none;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .social-link:hover {
+            background: #710000;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        /* SEÇÃO DE TÍTULO SEPARADA */
+        #hero-text {
+            padding: 60px 5%;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 300;
+            margin-bottom: 20px;
+            color: #333;
+            line-height: 1.2;
+            letter-spacing: -1px;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.4rem);
+            font-weight: 300;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* SEÇÃO VÍDEO E AGENDA */
+        #video-agenda {
+            padding: 80px 5%;
+            background: #f8f8f8;
+        }
+
+        .video-agenda-container {
+            max-width: 2200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .video-section h2,
+        .agenda-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: #333;
+            font-weight: 300;
+            letter-spacing: -0.5px;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .agenda-list {
+            list-style: none;
+        }
+
+        .agenda-item {
+            background: white;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-left: 3px solid #710000;
+            transition: all 0.3s ease;
+        }
+
+        .agenda-item:hover {
+            background: #f5f5f5;
+            border-left-width: 5px;
+        }
+
+        .event-date {
+            color: #710000;
+            font-weight: 500;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .event-title {
+            font-weight: 400;
+            margin: 8px 0 5px 0;
+            color: #333;
+            font-size: 1.1rem;
+        }
+
+        .event-location {
+            color: #666;
+            font-size: 0.7rem;
+            font-weight: 300;
+        }
+
+        /* SEÇÃO BIOTRAJETÓRIAS */
+        #biotrajetorias {
+            background: #710000;
+            padding: 80px 5%;
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .timeline-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+        }
+
+        .section-title {
+            color: #fff;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .section-description {
+            color: #f0f0f0;
+            font-size: 1.2rem;
+            margin-bottom: 50px;
+            text-align: center;
+            max-width: 600px;
+        }
+
+        #timeline-spiral-container {
+            position: relative;
+            width: 100%;
+            height: 700px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            background-color: #07d700;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            cursor: default;
+            transform: translate(-50%, -50%);
+        }
+
+        .timeline-dot.interactive {
+            background-color: #ffffff;
+            cursor: pointer;
+            z-index: 10;
+            box-shadow: 0 0 15px 3px rgba(255, 255, 255, 0.5);
+        }
+
+        .timeline-dot.interactive:hover {
+            transform: translate(-50%, -50%) scale(2.5);
+            box-shadow: 0 0 25px 5px rgba(255, 255, 255, 0.9);
+        }
+
+        .year-label {
+            position: absolute;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 0.7rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+            z-index: 15;
+            left: 20px;
+            top: -5px;
+        }
+
+        .timeline-dot.interactive:hover .year-label {
+            opacity: 1;
+        }
+
+        /* Estilos para a seção teatralidades */
+#teatralidades {
+    background-color: #710000; /* Cor vinho */
+    min-height: 100vh; /* Ocupa pelo menos a altura da tela */
+    padding: 80px 8%;
+}
+        
+        .teatralidades-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: start;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .teatro-text {
+            color: #dfcccc;
+            line-height: 1.8;
+        }
+
+        .teatro-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+
+        /* Slideshow Styles */
+        .teatro-slideshow {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .slideshow-container {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            border-radius: 0px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            background: #f0f0f0;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.7);
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(113,0,0,0.3), rgba(0,0,0,0.1));
+            z-index: 1;
+        }
+
+        .slide-indicators {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255,255,255,0.8);
+        }
+
+        .indicator.active {
+            background: #ffbb00;
+            border-color: #fff;
+            transform: scale(1.2);
+        }
+
+        .slide-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            color: white;
+            padding: 30px 25px 25px;
+            z-index: 5;
+        }
+
+        .slide-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            color: #ffbb00;
+        }
+
+        .slide-info p {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin: 0;
+        }
+
+        .saiba-mais-btn {
+            align-self: flex-start;
+            background: linear-gradient(135deg, #710000, #500000);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 0px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 5px 15px rgba(113,0,0,0.3);
+        }
+
+        .saiba-mais-btn:hover {
+            background: linear-gradient(135deg, #500000, #710000);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(113,0,0,0.4);
+            color: white;
+        }
+
+        /* Placeholder para imagens que não carregam */
+        .slide.no-image {
+            background: linear-gradient(135deg, #710000, #500000);
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        /* Responsividade */
+        @media screen and (max-width: 768px) {
+            .teatralidades-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .slideshow-container {
+                height: 300px;
+            }
+            
+            .teatro-text p {
+                text-align: left;
+                font-size: 1rem;
+            }
+            
+            .slide-info h3 {
+                font-size: 1.4rem;
+            }
+            
+            .slide-overlay {
+                padding: 20px 20px 20px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .slideshow-container {
+                height: 250px;
+            }
+            
+            .slide-info h3 {
+                font-size: 1.2rem;
+            }
+            
+            .slide-info p {
+                font-size: 0.9rem;
+            }
+            
+            .indicator {
+                width: 10px;
+                height: 10px;
+            }
+        }
+
+
+        /* SEÇÃO CONTATO */
+        #contato {
+            background: white;
+            padding: 80px 5%;
+            text-align: center;
+        }
+
+        .contact-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        #contato h2 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 300;
+            letter-spacing: -1px;
+        }
+
+        #contato p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .email-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: #710000;
+            color: white;
+            padding: 20px 30px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 400;
+            transition: all 0.3s ease;
+        }
+
+        .email-link:hover {
+            background: #500000;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(113, 0, 0, 0.3);
+            color: white;
+        }
+
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #f4f4f4;
+            border-radius: 0%;
+            padding: 30px;
+            width: 80%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: #710000;
+        }
+
+        #modal-year {
+            color: #710000;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 3px solid #710000;
+            padding-bottom: 10px;
+        }
+
+        .modal-body {
+            display: flex;
+            gap: 20px;
+        }
+
+        .modal-image-container {
+            flex: 0 0 40%;
+        }
+
+        #modal-image {
+            width: 100%;
+            height: auto;
+            border-radius: 0%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-text {
+            flex: 1;
+            color: #333;
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        /* CSS específico para a seção Bibliografia */
+        #bibliografia {
+            background-color: #f9f9f9;
+            padding: 80px 8%;
+        }
+
+        #bibliografia .content-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        #bibliografia .intro-section {
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        #bibliografia .intro-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #444;
+            text-align: justify;
+            margin-bottom: 30px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #bibliografia .contact-info {
+            background: linear-gradient(135deg, #710000, #500000);
+            color: white;
+            padding: 20px;
+            border-radius: 0%;
+            box-shadow: 0 5px 20px rgba(113, 0, 0, 0.2);
+            display: inline-block;
+            font-size: 1.1rem;
+        }
+
+        #bibliografia .section-title_2 {
+    color: #710000; /* ou qualquer cor que você queira */
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+}
+        #bibliografia .stats-section {
+            background: white;
+            padding: 40px;
+            border-radius: 0%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+
+        #bibliografia .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        #bibliografia .stat-item {
+            text-align: center;
+            padding: 25px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 0%;
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #bibliografia .stat-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #710000, #ffbb00);
+        }
+
+        #bibliografia .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(113, 0, 0, 0.15);
+            border-color: rgba(113, 0, 0, 0.2);
+        }
+
+        #bibliografia .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #710000;
+            display: block;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        #bibliografia .stat-label {
+            font-size: 1rem;
+            color: #666;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        #bibliografia .cta-section {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        #bibliografia .saiba-mais-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, #710000, #500000);
+            color: white;
+            padding: 18px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(113, 0, 0, 0.3);
+            border: 3px solid transparent;
+        }
+
+        #bibliografia .saiba-mais-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(113, 0, 0, 0.4);
+            background: linear-gradient(135deg, #500000, #710000);
+            border-color: rgba(255, 187, 0, 0.5);
+        }
+
+        #bibliografia .saiba-mais-btn i {
+            font-size: 1.1rem;
+            transition: transform 0.3s ease;
+        }
+
+        #bibliografia .saiba-mais-btn:hover i {
+            transform: translateX(5px);
+        }
+
+
+
+        /* RESPONSIVIDADE */
+        @media screen and (max-width: 768px) {
+            #nav_list {
+                display: none;
+            }
+
+            #mobile_btn {
+                display: block;
+            }
+
+            .social-media {
+                right: 20px;
+                gap: 15px;
+            }
+
+            .social-link {
+                width: 45px;
+                height: 45px;
+                font-size: 1.1rem;
+            }
+
+            .video-agenda-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .modal-body {
+                flex-direction: column;
+            }
+
+            .modal-image-container {
+                flex: none;
+            }
+
+            #timeline-spiral-container {
+                height: 500px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .hero-content {
+                margin-bottom: 50px;
+            }
+
+            .social-media {
+                flex-direction: row;
+                bottom: 20px;
+                top: auto;
+                right: 50%;
+                transform: translateX(50%);
+                gap: 20px;
+            }
+
+            #video-agenda,
+            #biotrajetorias {
+                padding: 60px 5%;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="src/styles/discografia.css">
+    <link rel="stylesheet" href="src/styles/filmografia.css">
+</head>
+<script src="src/javascript/discografia.js"></script>
+<script src="src/javascript/filmografia.js"></script>
+<body>
+    <header id="header">
+        <nav id="navbar">
+            <a href="#hero" id="nav_logo">
+                <img src="src/images/logo.png" alt="Salloma Salomão" class="logo-image">
+                <span>Salloma Salomão</span>
+            </a>
+            
+            <ul id="nav_list">
+                <li class="nav-item"><a href="#biotrajetorias">Biotrajetórias</a></li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="dropdown-toggle">Conteúdo <i class="fa-solid fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#discografia">Discografia</a></li>
+                        <li><a href="#filmografia">Filmografia</a></li>
+                        <li><a href="bibliografia.html">Bibliografia</a></li>
+                        <li><a href="teatralidades.html">Teatralidades</a></li>
+                        <li><a href="formacao.html">Formação</a></li>
+                        <li><a href="memorias.html">Memórias - Em Breve</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="dropdown-toggle">Shows <i class="fa-solid fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="https://www.youtube.com/watch?v=d0a7cVDaAE0&list=RDd0a7cVDaAE0&start_radio=1&" target="_blank">30 Anos de Musicalidade e Negritude</a></li>
+                        <li><a href="https://www.youtube.com/watch?v=QAzJCO5wUg4&" target="_blank">SALLOMA SALOMÃO 6.0 M'BANZO DO FUTURO - Estúdio Cine Becos</a></li>
+                        <li><a href="https://www.youtube.com/watch?v=6GYLnKX-D6w" target="_blank">SALLOMA SALOMÃO 6.0 Banda Al Andaluz Show Notas Totas da Madrugada</a></li>
+                        <li><a href="https://noitedostambores.com/?p=3044" target="_blank">Salloma Sallomão em Noite dos Tambores</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="dropdown-toggle">Podcast e Afins <i class="fa-solid fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="https://www.youtube.com/watch?v=Ux2AYCt4fP0" target="_blank">Mais Preta 3ª Temporada #EP05</a></li>
+                        <li><a href="https://www.youtube.com/watch?v=nTcHeaCEWQo" target="_blank">Z da Questão - 1º Videocast do Museu Itamar Assunção</a></li>
+                        <li><a href="https://www.youtube.com/watch?v=5eGcu4cVYBc&list=PLdRCuOXzOVz8lswsGexz_3ELd8RRcFqxc&index=4" target="_blank">HISTÓRIAS DE CONFORTO #EP05</a></li>
+                        <li><a href="https://open.spotify.com/episode/7ns2MDumXZxN8bw6hJVeYX?si=e8d744c9589943ee" target="_blank">Mano a mano: Katiuscia Ribeiro e Salloma Sallomão</a></li>
+                        <li><a href="https://jornal.usp.br/podcast/de-papo-pro-ar-138-o-mineiro-salloma-salomao-fala-sobre-seu-novo-trabalho-ancestres-de-prima-vera/" target="_blank">De papo para o ar #EP138 Jornal da USP</a></li>
+                        <li><a href="https://www.youtube.com/watch?v=p-3a04xURJg&t=191s" target="_blank">África e Africanidades</a></li>
+                        <li><a href="https://www.youtube.com/watch?v=HnqIfjc9AN0&t=547s" target="_blank">Websérie AfroTranscendence - Capítulo 07</a></li>
+                        <li><a href="https://www.youtube.com/playlist?list=PLggyRMb5eNeKXHKhQT4xUQ5O3JlkkX7RS" target="_blank">Websérie Coleção Antirracista</a></li>
+                        <li><a href="https://www.youtube.com/watch?v=PTMNWLQI4ow" target="_blank">Websérie Tão Longe Tão Perto</a></li>
+                        <li><a href="https://www.youtube.com/watch?v=C9CgMuEyE2M&list=PLi6-eYeTdWvfQZQqFZmQMiPf-8zGLkWH5" target="_blank">Rádio Busão Rede Móvel de comunicação periférica</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="dropdown-toggle">Notícias <i class="fa-solid fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="https://www.cartacapital.com.br/blogs/augusto-diniz/possibilidades-da-cultura-afro-salloma-salomao-vocaliza-4-cancoes-em-novo-disco/" target="_blank">Carta Capital</a></li>
+                        <li><a href="https://www.youtube.com/watch?v=Era-1Nhoj5w&t=110s" target="_blank">Brasil de Fato Entrevista</a></li>
+                        <li><a href="https://br.trace.tv/pessoas/entrevista-conheca-o-multiartista-pesquisador-educador-e-dramaturgo-salloma-salomao/" target="_blank">Trace Brasil</a></li>
+                        <li><a href="https://bravo.abril.com.br/musica/salloma-salomao-40-anos-de-carreira-entrevista/" target="_blank">Bravo! Grupo Abril</a></li>
+                        <li><a href="https://www.youtube.com/watch?v=i2yBdYLe53g&t=3377s" target="_blank">Cine Becos - Salloma Sallomão Pesquisa</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <button class="btn-contact" onclick="scrollToContact()">Contato</button>
+            
+            <button id="mobile_btn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- SEÇÃO HERO - FOTO DE DESTAQUE -->
+        <section id="hero">
+            <img src="src/images/foto_capa.jpg" alt="Salloma Salomão" class="hero-image">
+            <div class="hero-overlay"></div>
+            
+            <div class="social-media">
+                <a href="#" class="social-link" title="Instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="#" class="social-link" title="YouTube">
+                    <i class="fa-brands fa-youtube"></i>
+                </a>
+                <a href="#" class="social-link" title="Spotify">
+                    <i class="fa-brands fa-spotify"></i>
+                </a>
+                <a href="#" class="social-link" title="Facebook">
+                    <i class="fa-brands fa-facebook"></i>
+                </a>
+            </div>
+        </section>
+
+        <!-- SEÇÃO DE TÍTULO -->
+        <section id="hero-text">
+            <h1 class="hero-title">Salloma Salomão</h1>
+            <p class="hero-subtitle">Artista, músico e pesquisador da cultura afro-brasileira</p>
+        </section>
+
+        <!-- SEÇÃO VÍDEO E AGENDA -->
+        <section id="video-agenda">
+            <div class="video-agenda-container">
+                <div class="video-section">
+                    <h2>Trailer Muxima Kumbi</h2>
+                    <div class="video-container">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/YZ7ZwS0Ipm4?si=lgNrPOLF-RwZ385b" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                </div>
+                
+                <div class="agenda-section">
+                    <h2>Próximos Eventos</h2>
+                    <ul class="agenda-list">
+                        <li class="agenda-item">
+                            <div class="event-date">15 FEV 2025</div>
+                            <div class="event-title">Show Muxima Kumbi</div>
+                            <div class="event-location">SESC Pompéia, São Paulo</div>
+                        </li>
+                        <li class="agenda-item">
+                            <div class="event-date">22 MAR 2025</div>
+                            <div class="event-title">Apresentação Solo</div>
+                            <div class="event-location">Teatro Municipal, Rio de Janeiro</div>
+                        </li>
+                        <li class="agenda-item">
+                            <div class="event-date">10 ABR 2025</div>
+                            <div class="event-title">Festival de Música Afro-Brasileira</div>
+                            <div class="event-location">Centro Cultural, Salvador</div>
+                        </li>
+                        <li class="agenda-item">
+                            <div class="event-date">28 MAI 2025</div>
+                            <div class="event-title">Palestra e Performance</div>
+                            <div class="event-location">Universidade de Brasília, DF</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO BIOTRAJETÓRIAS -->
+        <section id="biotrajetorias">
+            <div class="timeline-container">
+                <h2 class="section-title">Biotrajetórias</h2>
+                <p class="section-description">
+                    Navegue pela trajetória artística de Salloma Salomão. 
+                    Passe o mouse sobre os círculos brancos e clique nas datas.
+                </p>
+                
+                <div id="timeline-spiral-container">
+                    <!-- A espiral será gerada via JavaScript -->
+                </div>
+                
+                <!-- Modal para exibir informações do ano -->
+                <div id="year-modal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-modal">&times;</span>
+                        <h3 id="modal-year">Ano</h3>
+                        <div class="modal-body">
+                            <div class="modal-image-container">
+                                <img id="modal-image" src="" alt="Imagem histórica">
+                            </div>
+                            <div class="modal-text">
+                                <p id="modal-description">Descrição dos acontecimentos do ano.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+<!-- Seção Discografia -->
+        <section id="discografia" class="content-section">
+            <div class="discografia-player">
+                <div class="album-navigation">
+                    <button class="nav-arrow" id="prevAlbum">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="album-info">
+                        <div class="album-title" id="albumTitle">Carregando...</div>
+                        <div class="album-year" id="albumYear"></div>
+                    </div>
+                    <button class="nav-arrow" id="nextAlbum">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+
+                <div class="discografia-content">
+                    <div class="tracks-section">
+                        <div class="loading-spinner" id="loadingSpinner">
+                            <i class="fas fa-spinner fa-spin fa-2x"></i>
+                            <p>Carregando faixas...</p>
+                        </div>
+                        <ul class="track-list" id="trackList"></ul>
+                    </div>
+
+                    <div class="album-artwork">
+                        <div class="artwork-container">
+                            <img class="album-cover" id="albumCover" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDMwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjNzEwMDAwIi8+Cjx0ZXh0IHg9IjE1MCIgeT0iMTUwIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE4Ij5TYWxsb21hPC90ZXh0Pgo8L3N2Zz4K" alt="Capa do Álbum">
+                            <div class="vinyl-overlay"></div>
+                        </div>
+                        <div class="album-details" id="albumDetails">
+                            <p><strong>Formato:</strong> Digital/Físico</p>
+                            <p><strong>Gravadora:</strong> Aruanda Mundi</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>  
+    <!-- Seção Filmografia -->
+        
+   <section id="filmografia" class="content-section">
+       <!-- O conteúdo será inserido dinamicamente pelo JavaScript -->
+   </section>
+
+   <!-- Seção Bibliografia -->
+        <section id="bibliografia" class="content-section">
+            <h2 class="section-title_2">Bibliografia</h2>
+            
+            <div class="content-wrapper">
+                <!-- Seção de Introdução -->
+                <div class="intro-section">
+                    <div class="intro-text">
+                        Salloma Salomão é autor de uma vasta produção bibliográfica que abrange literatura, teatro, música e pesquisa acadêmica, com foco nas culturas afro-brasileiras e na diáspora africana. Seus textos analisam a história, a musicalidade e as manifestações culturais negras, destacando temas como identidade, resistência e contracultura. Combinando rigor acadêmico e poética da cena, resgata tradições, questiona o poder e propõe narrativas de memória, resistência e inventividade cultural.
+                    </div>
+                </div>
+
+                <!-- Estatísticas -->
+                <div class="stats-section">
+                    <h2 style="color: #710000; margin-bottom: 15px;">Produção Bibliográfica</h2>
+                    <p style="color: #666;">Panorama da obra literária e acadêmica</p>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-number" id="total-obras">19</span>
+                            <div class="stat-label">Obras</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">27</span>
+                            <div class="stat-label">Anos de Produção</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">4</span>
+                            <div class="stat-label">Categorias</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">3</span>
+                            <div class="stat-label">Prêmios Literários</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Call to Action -->
+                <div class="cta-section">
+                    <a href="bibliografia.html" class="saiba-mais-btn">
+                        <span>Saiba Mais</span>
+                        <i class="fas fa-book-open"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+
+<!-- Seção Teatralidades -->
+<section id="teatralidades" class="content-section">
+    <h2 class="section-title">Teatralidades</h2>
+    <p class="section-description">
+        
+    </p>
+    
+    <div class="teatralidades-content">
+        <div class="teatro-text">
+            <p>
+                Ao longo de sua carreira, tem se dedicado não apenas como intérprete, mas também como dramaturgo, diretor musical e criador de trilhas sonoras que dialogam com as mais diversas linguagens cênicas.
+            </p>
+            
+            <p>
+                Suas participações em montagens como "Transe – Ato 1", "Gota D'água Preta" e "A Fuzarca dos Descalços" demonstram um compromisso artístico que vai além da performance, abraçando a responsabilidade de dar voz às narrativas marginalizadas e de questionar as estruturas sociais através da arte teatral.
+            </p>
+            
+            <p>
+                Como dramaturgo, Salloma desenvolve textos que entrelaçam a música, a poesia e a crítica social, criando espetáculos que funcionam como pontes entre o público e reflexões sobre identidade, resistência e memória coletiva. Sua obra teatral é um testemunho vivo da potência transformadora das artes cênicas.
+            </p>
+        </div>
+        
+        <div class="teatro-slideshow">
+            <div class="slideshow-container">
+                <div class="slide active" data-image="src/images/T01/1.jpg"></div>
+                <div class="slide" data-image="src/images/T02/1.jpg"></div>
+                <div class="slide" data-image="src/images/T03/1.jpg"></div>
+                <div class="slide" data-image="src/images/T04/1.jpg"></div>
+                <div class="slide" data-image="src/images/T05/1.jpg"></div>
+                
+                <!-- Indicadores 
+                <div class="slide-indicators">
+                    <span class="indicator active" data-slide="0"></span>
+                    <span class="indicator" data-slide="1"></span>
+                    <span class="indicator" data-slide="2"></span>
+                    <span class="indicator" data-slide="3"></span>
+                    <span class="indicator" data-slide="4"></span>
+                </div>-->
+                
+                
+            </div>
+            
+            <a href="teatralidades.html" class="saiba-mais-btn">
+                <span>Saiba Mais</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+
+   <!-- Seção Contato -->
+<section id="contato">
+    <div class="contact-container">
+        <h2>Contato</h2>
+        <p>Para mais informações sobre shows, projetos e parcerias:</p>
+        <a href="mailto:aruandomundi4@gmail.com" class="email-link">
+            <i class="fas fa-envelope"></i>
+            aruandomundi4@gmail.com
+        </a>
+    </div>
+</section>
+       
+    <script>
+        // Dados da timeline completos (todos os 39 pontos originais)
+        const timelineData = [
+            {
+                year: 1961,
+                description: "Nascimento de Salloma Salomão em São Paulo.",
+                image: "src/images/timeline/1961.jpeg"
+            },
+            {
+                year: 1965,
+                description: "Primeiros contatos com a música na infância, por influência de sua família que tinha forte ligação com as tradições culturais afro-brasileiras.",
+                image: "src/images/timeline/1965.jpeg"
+            },
+            {
+                year: 1970,
+                description: "Começa a aprender seus primeiros instrumentos musicais e a participar de grupos culturais comunitários em São Paulo.",
+                image: "src/images/timeline/1970.jpeg"
+            },
+            {
+                year: 1974,
+                description: "Participa de sua primeira apresentação pública durante um festival escolar, onde demonstra seu talento emergente.",
+                image: "src/images/timeline/1974.jpeg"
+            },
+            {
+                year: 1978,
+                description: "Início da carreira musical, participando de grupos de música experimental e fundindo influências do jazz com a música afro-brasileira.",
+                image: "src/images/timeline/1978.jpeg"
+            },
+            {
+                year: 1980,
+                description: "Forma seu primeiro conjunto musical chamado 'Raízes Sonoras', explorando ritmos tradicionais com uma abordagem contemporânea.",
+                image: "src/images/timeline/1980.jpeg"
+            },
+            {
+                year: 1982,
+                description: "Realiza suas primeiras gravações em um estúdio independente, criando material que circularia em formato de fitas cassete.",
+                image: "src/images/timeline/1982.jpeg"
+            },
+            {
+                year: 1985,
+                description: "Lançamento do primeiro álbum solo 'Raízes e Horizontes', que marca o início de sua trajetória como artista independente e pesquisador cultural.",
+                image: "src/images/timeline/1985.jpeg"
+            },
+            {
+                year: 1987,
+                description: "Inicia suas pesquisas sobre música de matriz africana no Brasil, visitando comunidades tradicionais e realizando registros sonoros.",
+                image: "src/images/timeline/1987.jpeg"
+            },
+            {
+                year: 1989,
+                description: "Recebe sua primeira bolsa de estudos para pesquisa musical, permitindo aprofundar seus conhecimentos sobre ritmos afro-brasileiros.",
+                image: "src/images/timeline/1989.jpeg"
+            },
+            {
+                year: 1992,
+                description: "Participação em importantes festivais internacionais de música, levando sua arte para além das fronteiras brasileiras e consolidando seu reconhecimento.",
+                image: "src/images/timeline/1992.jpeg"
+            },
+            {
+                year: 1993,
+                description: "Lança seu segundo álbum 'Vozes da Diáspora', explorando conexões entre ritmos africanos e suas manifestações na música brasileira.",
+                image: "src/images/timeline/1993.jpeg"
+            },
+            {
+                year: 1995,
+                description: "Inicia sua carreira como professor, ministrando oficinas sobre música e cultura afro-brasileira em centros culturais de São Paulo.",
+                image: "src/images/timeline/1995.jpeg"
+            },
+            {
+                year: 1996,
+                description: "Desenvolve parceria com artistas internacionais, participando de um projeto de intercâmbio cultural com músicos africanos.",
+                image: "src/images/timeline/1996.jpeg"
+            },
+            {
+                year: 1998,
+                description: "Publicação do seu primeiro livro 'Ritmos da Resistência', um estudo sobre a música como instrumento de afirmação cultural e resistência política.",
+                image: "src/images/timeline/1998.jpeg"
+            },
+            {
+                year: 1999,
+                description: "Conclui sua formação acadêmica em Música e Estudos Culturais, ampliando seu repertório teórico e prático.",
+                image: "src/images/timeline/1999.jpeg"
+            },
+            {
+                year: 2000,
+                description: "Comemora 20 anos de carreira com uma turnê especial que percorre as principais capitais brasileiras.",
+                image: "src/images/timeline/2000.jpeg"
+            },
+            {
+                year: 2002,
+                description: "Lança o álbum 'Encruzilhadas', onde explora os diálogos entre tradição e modernidade na música afro-brasileira.",
+                image: "src/images/timeline/2002.jpeg"
+            },
+            {
+                year: 2003,
+                description: "Inicia uma série de documentários audiovisuais sobre manifestações culturais tradicionais em comunidades quilombolas.",
+                image: "src/images/timeline/2003.jpeg"
+            },
+            {
+                year: 2005,
+                description: "Criação do projeto social 'Sons da Periferia', dedicado à formação musical de jovens em comunidades vulneráveis de São Paulo.",
+                image: "src/images/timeline/2005.jpeg"
+            },
+            {
+                year: 2006,
+                description: "Publica seu segundo livro 'Tambores Falantes', abordando a linguagem dos tambores nas culturas de matriz africana.",
+                image: "src/images/timeline/2006.jpeg"
+            },
+            {
+                year: 2007,
+                description: "Realiza uma série de concertos temáticos sobre a história da música negra no Brasil, apresentados em espaços culturais e educacionais.",
+                image: "src/images/timeline/2007.jpeg"
+            },
+            {
+                year: 2008,
+                description: "Desenvolve pesquisas sobre música e espiritualidade, investigando os cantos sagrados de religiões de matriz africana.",
+                image: "src/images/timeline/2008.jpeg"
+            },
+            {
+                year: 2010,
+                description: "Recebimento do Prêmio Nacional de Cultura pelo conjunto de sua obra e contribuição para a valorização da cultura afro-brasileira.",
+                image: "src/images/timeline/2010.jpeg"
+            },
+            {
+                year: 2011,
+                description: "Lidera um movimento pela preservação de manifestações culturais tradicionais ameaçadas pelo avanço da urbanização.",
+                image: "src/images/timeline/2011.jpeg"
+            },
+            {
+                year: 2012,
+                description: "Lança o álbum 'Cartografias Sonoras', mapeando diferentes expressões musicais afro-brasileiras de norte a sul do país.",
+                image: "src/images/timeline/2012.jpeg"
+            },
+            {
+                year: 2013,
+                description: "Inicia uma série de palestras internacionais sobre a importância da música como elemento de resistência cultural.",
+                image: "src/images/timeline/2013.jpeg"
+            },
+            {
+                year: 2014,
+                description: "Participa da criação de uma rede de artistas afro-latinoamericanos, promovendo intercâmbios e produções colaborativas.",
+                image: "src/images/timeline/2014.jpeg"
+            },
+            {
+                year: 2015,
+                description: "Lançamento do álbum 'Travessias', considerado pela crítica como um dos trabalhos mais importantes de sua carreira, misturando ritmos tradicionais com elementos contemporâneos.",
+                image: "src/images/timeline/2015.jpeg"
+            },
+            {
+                year: 2016,
+                description: "Desenvolve um programa de residências artísticas para jovens músicos, oferecendo orientação e oportunidades de profissionalização.",
+                image: "src/images/timeline/2016.jpeg"
+            },
+            {
+                year: 2017,
+                description: "Publica o livro 'Poéticas da Ancestralidade', onde reflete sobre o papel da memória e da tradição oral na música contemporânea.",
+                image: "src/images/timeline/2017.jpeg"
+            },
+            {
+                year: 2018,
+                description: "Realiza uma turnê internacional 'Pontes Sonoras', apresentando-se em festivais de world music na Europa e África.",
+                image: "src/images/timeline/2018.jpeg"
+            },
+            {
+                year: 2019,
+                description: "Inaugura um centro cultural dedicado à preservação e difusão da música afro-brasileira em São Paulo.",
+                image: "src/images/timeline/2019.jpeg"
+            },
+            {
+                year: 2020,
+                description: "Lançamento do filme 'Todos os mortos' (Direção de Marco Dutra e Caetano Gotardo) no festival de Cinema de Berlim na qual Salloma é colaborador e assina Trilha Sonora. Lançamento do álbum digital 'Mensagens aos terrâqueos' em parceria com Gui Braz. Ainda ministrou o Curso Raízes Africanas da Música Brasileira no Centro de Música do SESC-SP",
+                image: "src/images/timeline/2020.jpeg"
+            },
+            {
+                year: 2021,
+                description: "Recebe o Troféu Kikito de Ouro, Prêmio de Melhor Trilha Musical no Festival Internacional de Cinema de Gramado, pelo trabalho em 'Todos Mortos' de Gotardo e Dutra, coprodução franco-brasileira. Ainda no campo audiovisual, atuou no elenco do Filme 'Negro em mim' (Direção Macca Ramos). Ainda nesse ano é convidado a participar da Mesa 6 do ciclo de encontros '1922: Modernismos em debate' organizado pelo instituto Moreira Salles. No campo literário explora o universo infantil no seu livro 'As aventuras do pequeno samba' lançado pela sua produtora Aruanda Mundi.",
+                image: "src/images/timeline/2021.jpeg"
+            },
+            {
+                year: 2022,
+                description: "Participação no podcast Mano a Mano dividindo a palavra com a doutora Katiuscia Ribeiro, disponível na plataforma Spotify. Um ano ativo no setor teatral, produzindo a trilha sonora com Gui Braz em dois espetáculos teatrais: 'Nzinga' do Coletivo negro (Direção Aysha Nascimento e Flávio Rodrigues) e 'Havia um país aqui antes do carnaval' da Cia Experimental Kaus (Direção de Reginaldo Pereira). Em novembro o Show Muxima Kumbi de Saloma e Al Andaluz chega ao Sesc Pompéia.",
+                image: "src/images/timeline/2022.jpeg"
+            },
+            {
+                year: 2023,
+                description: "É vencedor do Prêmio Mestres da Cultura pela Fundação Nacional das Artes. Em outubro é convidado a colaborar com seu depoimento no filme 'Noite e dia, Lima Barreto' de Rodrigo Grota disponível no Prime Video. Também realizou consultoria de prosódia para o filme 'Rota 66 A polícia que mata' na direção de Philippe Barcinski e Diego Martins.",
+                image: "src/images/timeline/2023.jpeg"
+            },
+            {
+                year: 2024,
+                description: "Protagonizou a peça teatral 'Transe - Ato 1' (Direção Marcio Castro) com estreia em outubro de 2024, no Sesc Belenzinho, SP. Em dezembro lança o álbum 'Luanda Mana Lua' nas plataformas digitais com parcerias de Lincoln Antonio e Ito Alves.",
+                image: "src/images/timeline/2024.jpeg"
+            },
+            {
+                year: 2025,
+                description: "Começa o ano com o Show Musical Muxima Kumbi de Salloma Salomão e Al Andaluz. No mesmo ano estreia o filme 'Montanha em Movimento', mais uma parceria entre Salloma e o diretor Caetano Gotardo, na qual Salloma atua e compõe trilha sonora.",
+                image: "src/images/timeline/2025.jpeg"
+            }
+        ];
+
+
+
+        // Navbar scroll effect
+        $(window).scroll(function() {
+            const header = $('#header');
+            if ($(this).scrollTop() > 100) {
+                header.addClass('scrolled');
+            } else {
+                header.removeClass('scrolled');
+            }
+        });
+
+        // Smooth scrolling
+        $('a[href^="#"]').on('click', function(e) {
+            e.preventDefault();
+            const target = $($(this).attr('href'));
+            if (target.length) {
+                $('html, body').animate({
+                    scrollTop: target.offset().top - 80
+                }, 800);
+            }
+        });
+
+        // Timeline spiral generation (funcionalidade completa restaurada)
+        function generateSpiral() {
+            const container = document.getElementById('timeline-spiral-container');
+            if (!container) return;
+            
+            const centerX = container.offsetWidth / 2;
+            const centerY = container.offsetHeight / 2;
+            
+            // Parâmetros da espiral - ajustados para uma espiral mais fechada
+            const totalDots = 195; // Número total de círculos aumentado para comportar 39 datas interativas
+            const interactiveDotInterval = 5; // A cada 5 círculos, 1 é interativo (agora temos 39 pontos interativos)
+            
+            // Índice dos dados da timeline
+            let timelineIndex = 0;
+            
+            // Criar círculos em formato de espiral
+            for (let i = 0; i < totalDots; i++) {
+                // Calcular coordenadas polares para uma espiral de Arquimedes
+                const theta = 0.175 * i; // Controla a velocidade de rotação da espiral
+                const radius = i === 0 ? 0 : 9 + 0.95 * theta; // Primeiro círculo com raio zero, depois crescimento linear
+                
+                // Converter para coordenadas cartesianas
+                const x = centerX + radius * Math.cos(theta) * 9; // Fator de escala ajustado
+                const y = centerY + radius * Math.sin(theta) * 9; // Fator de escala ajustado
+                
+                // Verificar se o círculo deve ser interativo (a cada interactiveDotInterval)
+                const isInteractive = i % interactiveDotInterval === 0 && timelineIndex < timelineData.length;
+                
+                // Criar o círculo com tamanho aleatório
+                const dot = document.createElement('div');
+                dot.className = 'timeline-dot';
+                
+                // Variação aleatória de tamanho para cada círculo
+                const baseSizeInPx = 8; // Tamanho base em pixels
+                const randomFactor = Math.random() * 0.85 + 0.75; // Varia entre 0.75x e 1.25x do tamanho original
+                const dotSize = baseSizeInPx * randomFactor;
+                
+                // Aplicar tamanho aleatório
+                dot.style.width = dotSize + 'px';
+                dot.style.height = dotSize + 'px';
+                
+                if (isInteractive) {
+                    dot.className += ' interactive';
+                    dot.dataset.year = timelineData[timelineIndex].year;
+                    dot.dataset.index = timelineIndex;
+                    
+                    // Adicionar evento de clique
+                    dot.addEventListener('click', function() {
+                        showModal(this.dataset.index);
+                    });
+                    
+                    // Criar o label do ano e adicioná-lo dentro do dot
+                    const yearLabel = document.createElement('div');
+                    yearLabel.className = 'year-label';
+                    yearLabel.textContent = timelineData[timelineIndex].year;
+                    
+                    // Adicionar o label dentro do dot
+                    dot.appendChild(yearLabel);
+                    
+                    timelineIndex++;
+                }
+                
+                // Posicionar o círculo
+                dot.style.left = x + 'px';
+                dot.style.top = y + 'px';
+                
+                container.appendChild(dot);
+            }
+        }
+
+        // Modal functions
+        function showModal(index) {
+            const modal = document.getElementById('year-modal');
+            const data = timelineData[index];
+            
+            document.getElementById('modal-year').textContent = data.year;
+            document.getElementById('modal-description').textContent = data.description;
+            document.getElementById('modal-image').src = data.image;
+            
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('year-modal').style.display = 'none';
+        }
+
+        // Função para scroll suave para contato
+        function scrollToContact() {
+            const contactSection = document.getElementById('contato');
+            if (contactSection) {
+                contactSection.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+
+        // Initialize
+        $(document).ready(function() {
+            generateSpiral();
+            
+            $('.close-modal').on('click', closeModal);
+            $('#year-modal').on('click', function(e) {
+                if (e.target === this) closeModal();
+            });
+
+            // Dropdown functionality - versão corrigida
+            $(document).on('click', '.dropdown-toggle', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const $dropdown = $(this).parent('.dropdown');
+                const isActive = $dropdown.hasClass('active');
+                
+                // Fecha todos os dropdowns
+                $('.dropdown').removeClass('active');
+                
+                // Se não estava ativo, ativa este
+                if (!isActive) {
+                    $dropdown.addClass('active');
+                }
+            });
+
+            // Fecha todos os dropdowns ao clicar fora
+            $(document).on('click', function(e) {
+                if (!$(e.target).closest('.dropdown').length) {
+                    $('.dropdown').removeClass('active');
+                }
+            });
+
+            // Impede que cliques no dropdown menu fechem o dropdown
+            $(document).on('click', '.dropdown-menu', function(e) {
+                e.stopPropagation();
+            });
+
+            // Navegação pelos itens do submenu
+            $(document).on('click', '.dropdown-menu a', function(e) {
+                const href = $(this).attr('href');
+                
+                // Se for um link externo ou arquivo HTML, permitir comportamento padrão
+                if (href.startsWith('http') || $(this).attr('target') === '_blank' || href.endsWith('.html')) {
+                    // Fecha o dropdown
+                    $(this).closest('.dropdown').removeClass('active');
+                    return; // Permite navegação normal
+                }
+                
+                e.preventDefault();
+                
+                // Fecha o dropdown
+                $(this).closest('.dropdown').removeClass('active');
+                
+                // Navegação suave para âncoras internas
+                const target = $(href);
+                if (target.length) {
+                    $('html, body').animate({
+                        scrollTop: target.offset().top - 80
+                    }, 800);
+                }
+            });
+
+            console.log('Dropdowns inicializados'); // Debug
+        });
+
+        // Regenerate spiral on resize
+        $(window).resize(function() {
+            const container = document.getElementById('timeline-spiral-container');
+            if (container) {
+                container.innerHTML = '';
+                generateSpiral();
+            }
+        });
+
+    document.addEventListener('DOMContentLoaded', function() {
+    const slides = document.querySelectorAll('#teatralidades .slide');
+    const indicators = document.querySelectorAll('#teatralidades .indicator');
+    let currentSlide = 0;
+    let slideInterval;
+
+    // Função para carregar imagem de um slide
+    function loadSlideImage(slide, imagePath) {
+        const img = new Image();
+        
+        img.onload = function() {
+            slide.style.backgroundImage = `url("${imagePath}")`;
+            console.log('✓ Imagem carregada:', imagePath);
+        };
+        
+        img.onerror = function() {
+            console.warn('✗ Erro ao carregar:', imagePath);
+            // Tentar alternativas
+            const alternatives = [
+                imagePath.replace('.jpg', '.jpeg'),
+                imagePath.replace('.jpg', '.png'),
+                imagePath.replace('.jpg', '.webp')
+            ];
+            
+            tryAlternatives(alternatives, 0, slide);
+        };
+        
+        img.src = imagePath;
+    }
+
+    function tryAlternatives(alternatives, index, slide) {
+        if (index >= alternatives.length) {
+            // Todas as alternativas falharam
+            slide.classList.add('no-image');
+            slide.innerHTML = '<i class="fas fa-theater-masks fa-3x" style="margin-bottom: 10px;"></i><br>Imagem Teatral';
+            return;
+        }
+
+        const img = new Image();
+        const currentAlt = alternatives[index];
+        
+        img.onload = function() {
+            slide.style.backgroundImage = `url("${currentAlt}")`;
+            console.log('✓ Alternativa carregada:', currentAlt);
+        };
+        
+        img.onerror = function() {
+            tryAlternatives(alternatives, index + 1, slide);
+        };
+        
+        img.src = currentAlt;
+    }
+
+    // Carregar todas as imagens
+    slides.forEach((slide, index) => {
+        const imagePath = slide.dataset.image;
+        if (imagePath) {
+            loadSlideImage(slide, imagePath);
+        }
+    });
+
+    // Função para mostrar slide específico
+    function showSlide(index) {
+        // Remove active de todos
+        slides.forEach(slide => slide.classList.remove('active'));
+        indicators.forEach(indicator => indicator.classList.remove('active'));
+        
+        // Adiciona active ao atual
+        if (slides[index]) {
+            slides[index].classList.add('active');
+        }
+        if (indicators[index]) {
+            indicators[index].classList.add('active');
+        }
+        
+        currentSlide = index;
+    }
+
+    // Função para próximo slide
+    function nextSlide() {
+        const next = (currentSlide + 1) % slides.length;
+        showSlide(next);
+    }
+
+    // Event listeners para indicadores
+    indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => {
+            clearInterval(slideInterval);
+            showSlide(index);
+            startSlideshow();
+        });
+    });
+
+    // Função para iniciar slideshow automático
+    function startSlideshow() {
+        slideInterval = setInterval(nextSlide, 2000); // 1 segundo
+    }
+
+    // Pausar ao hover e retomar ao sair
+    const slideshowContainer = document.querySelector('#teatralidades .slideshow-container');
+    if (slideshowContainer) {
+        slideshowContainer.addEventListener('mouseenter', () => {
+            clearInterval(slideInterval);
+        });
+        
+        slideshowContainer.addEventListener('mouseleave', () => {
+            startSlideshow();
+        });
+    }
+
+    // Iniciar slideshow
+    startSlideshow();
+    
+    console.log('Slideshow teatralidades inicializado com', slides.length, 'slides');
+});
+</script>
+</body>
+</html>

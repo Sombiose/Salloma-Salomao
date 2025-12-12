@@ -1,0 +1,207 @@
+/* Estilos para a seção da Linha do Tempo */
+#tempo {
+    background-color: #710000; /* Fundo vermelho escuro */
+    padding: 50px 8%;
+    z-index: 1;
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden; /* Para evitar que os círculos saiam da seção */
+}
+
+.timeline-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.section-title {
+    color: #fff;
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    text-align: center;
+    position: relative;
+    z-index: 7; /* Para ficar acima dos círculos */
+}
+
+.section-description {
+    color: #f0f0f0;
+    font-size: 1.2rem;
+    margin-bottom: 50px;
+    text-align: center;
+    position: relative;
+    z-index: 7; /* Para ficar acima dos círculos */
+}
+
+#timeline-spiral-container {
+    position: relative;
+    width: 100%;
+    height: 700px; /* Altura aumentada para acomodar a espiral */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+/* Estilos para os círculos */
+.timeline-dot {
+    position: absolute;
+    background-color: #bbff00; /* Círculos amarelos como na versão original */
+    width: 10px; /* 3mm aproximadamente */
+    height: 10px; /* 3mm aproximadamente */
+    border-radius: 50%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    cursor: default;
+    transform: translate(-50%, -50%); /* Centraliza o círculo na sua posição */
+}
+
+/* Para os círculos que fazem parte da linha do tempo */
+.timeline-dot.interactive {
+    background-color: #ffffff; /* Círculos interativos são brancos como na versão original */
+    cursor: pointer;
+    z-index: 10; /* Para ficar acima dos outros círculos */
+    box-shadow: 0 0 15px 3px rgba(255, 255, 255, 0.5); /* Sombra para destacar os círculos interativos */
+}
+
+.timeline-dot.interactive:hover {
+    transform: translate(-50%, -50%) scale(2.5); /* Mantém a centralização ao escalar */
+    box-shadow: 0 0 25px 5px rgba(255, 255, 255, 0.9); /* Sombra mais intensa no hover */
+}
+
+/* Texto do ano que aparece ao passar o mouse */
+.year-label {
+    position: absolute;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 0.7rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    text-shadow: 0.8px 0.8px 0.8px rgba(3, 2, 2, 0.8);
+    z-index: 15; /* Para ficar acima dos círculos */
+    left: 20px; /* Posição à direita do círculo */
+    top: -5px;
+}
+
+.timeline-dot.interactive:hover .year-label {
+    opacity: 1;
+}
+
+/* Estilos para o modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #f4f4f4;
+    border-radius: 15px;
+    padding: 25px;
+    width: 80%;
+    max-width: 800px;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 0 25px rgba(255, 187, 0, 0.5);
+    animation: modalFadeIn 0.4s;
+}
+
+@keyframes modalFadeIn {
+    from {opacity: 0; transform: translateY(-50px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-modal:hover {
+    color: #FF6B00;
+}
+
+#modal-year {
+    color: #8B0000;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: center;
+    border-bottom: 3px solid #FFBB00;
+    padding-bottom: 10px;
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.modal-image-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#modal-image {
+    max-width: 100%;
+    max-height: 750px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.modal-text {
+    color: #333;
+    line-height: 1.6;
+    font-size: 1.1rem;
+}
+
+/* Media queries para responsividade */
+@media screen and (max-width: 768px) {
+    #timeline-spiral-container {
+        height: 500px;
+    }
+    
+    .modal-content {
+        width: 90%;
+        padding: 15px;
+    }
+    
+    .modal-body {
+        flex-direction: column;
+    }
+    
+    #modal-image {
+        max-height: 200px;
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1200px) {
+    .modal-body {
+        flex-direction: row;
+    }
+    
+    .modal-image-container {
+        width: 40%;
+    }
+    
+    .modal-text {
+        width: 60%;
+    }
+}

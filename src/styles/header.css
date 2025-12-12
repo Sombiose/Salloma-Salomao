@@ -1,0 +1,228 @@
+header {
+    width: 100%;
+    padding: 20px 8%;
+    position: fixed; /* Torna a navbar fixa */
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Garante que fique acima de outros elementos */
+    background-color: rgba(162, 162, 162, 1); /* Cor base (mesma do body) */
+    transition: all 0.2s ease; /* Transição suave para todas as propriedades */
+}
+
+/* Classe adicionada quando estiver rolando */
+header.scrolling {
+    background-color: rgba(192, 192, 192, 0.7); /* Versão transparente */
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15);
+    padding: 15px 8%; /* Reduzir o padding ao rolar */
+}
+
+/* Classe adicionada quando deve desaparecer */
+header.hidden {
+    transform: translateY(-100%); /* Move para fora da tela */
+}
+
+#navbar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* LOGO COM IMAGEM E TEXTO - SUBSTITUA O #nav_logo EXISTENTE */
+#nav_logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: rgb(25, 55, 13);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    transition: transform 0.3s ease;
+    text-decoration: none;
+}
+
+#nav_logo:hover {
+    transform: scale(1.05);
+}
+
+.logo-image {
+    width: 75px;
+    height: 75px;
+    object-fit: contain;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.logo-text {
+    font-size: 24px;
+    font-style: normal;
+    line-height: 1.2;
+}
+
+#nav_list {
+    display: flex;
+    list-style: none;
+    gap: 48px;
+}
+
+.nav-item {
+    position: relative;
+}
+
+.nav-item a {
+    text-decoration: none;
+    color: rgb(30, 30, 113);
+    font-weight: 600;
+    position: relative;
+    padding: 5px 0;
+    transition: color 0.3s ease;
+}
+
+/* Efeito de linha de destaque sob os links */
+.nav-item a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: rgb(156, 78, 230);
+    transition: width 0.3s ease;
+}
+
+.nav-item a:hover::after,
+.nav-item a.active::after {
+    width: 100%;
+}
+
+.nav-item a:hover,
+.nav-item a.active {
+    color: rgb(156, 78, 230);
+}
+
+/* Botão de contato */
+.btn-default {
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(255, 187, 0);
+    border-radius: 10px;
+    padding: 8px 16px;
+    font-weight: 600;
+    color: rgb(53, 53, 60);
+    box-shadow: 0px 0px 10px 4px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-decoration: none;
+}
+
+.btn-default:hover {
+    background-color: rgb(156, 78, 230);
+    color: aliceblue;
+    transform: translateY(-3px);
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+#mobile_btn {
+    display: none;
+    border: none;
+    background-color: transparent;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: rgb(30, 30, 113);
+    transition: color 0.3s ease;
+}
+
+#mobile_btn:hover {
+    color: rgb(156, 78, 230);
+}
+
+#mobile_menu {
+    display: none;
+}
+
+/* Ajuste para compensar o header fixo */
+main#content {
+    padding-top: 90px; /* Ajuste conforme necessário */
+}
+
+/* FUNÇÃO PARA TELA SE ADAPTAR PARA MOBILE */
+@media screen and (max-width: 800px) {
+    
+.logo-image {
+    width: 65px;
+    height: 65px;
+}
+
+.logo-text {
+    font-size: 20px;
+}
+
+#nav_logo {
+    gap: 8px;
+}
+
+    #nav_list, #navbar .btn-default {
+        display: none;
+    }
+
+    #mobile_btn {
+        display: block;
+    }
+
+    #mobile_menu.active {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: fixed;
+        top: 76px; /* Ajustar baseado na altura do header */
+        left: 0;
+        width: 100%;
+        background-color: rgba(162, 162, 162, 0.95);
+        z-index: 999;
+        padding: 20px 0;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        animation: slideDown 0.3s ease forwards;
+    }
+    
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    #mobile_nav_list {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin: 12px 0px; 
+        width: 100%;
+        padding: 0 20px;
+    }
+
+    #mobile_nav_list .nav-item {
+        list-style: none;
+        text-align: center;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        padding-bottom: 15px;
+    }
+
+    #mobile_nav_list .nav-item:last-child {
+        border-bottom: none;
+    }
+
+    #mobile_menu .nav-item a {
+        display: block;
+        padding: 10px 15px;
+        font-size: 1.1rem;
+    }
+    
+    #mobile_menu .btn-default {
+        margin-top: 15px;
+    }
+}

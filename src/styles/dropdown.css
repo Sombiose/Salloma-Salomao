@@ -1,0 +1,114 @@
+/* Estilos para os menus dropdown */
+
+/* Estrutura base do dropdown */
+.dropdown {
+    position: relative;
+}
+
+/* Estilo para o botão/link que ativa o dropdown */
+.dropdown-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+/* Ícone de seta */
+.dropdown-toggle i {
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+/* Rotação do ícone quando o dropdown está ativo */
+.dropdown.active .dropdown-toggle i {
+    transform: rotate(180deg);
+}
+
+/* Estilo para o menu dropdown */
+.dropdown-menu {
+    display: none; /* Inicialmente oculto */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 200px;
+    background-color: rgba(242, 242, 242, 0.95);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 10px 0;
+    z-index: 1100;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* Mostrar o dropdown quando está ativo */
+.dropdown.active .dropdown-menu {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+    animation: fadeInDropdown 0.3s ease forwards;
+}
+
+@keyframes fadeInDropdown {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Itens do menu dropdown */
+.dropdown-menu li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown-menu li a {
+    display: block;
+    padding: 10px 20px;
+    color: rgb(30, 30, 113);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.dropdown-menu li a:hover {
+    background-color: rgba(156, 78, 230, 0.1);
+    color: rgb(156, 78, 230);
+    transform: translateX(5px);
+}
+
+/* Estilos específicos para o menu mobile */
+#mobile_menu .dropdown-toggle {
+    width: 100%;
+    justify-content: space-between;
+    padding: 10px 5px;
+}
+
+#mobile_menu .dropdown-menu {
+    position: static;
+    background-color: transparent;
+    box-shadow: none;
+    border-radius: 0;
+    min-width: auto;
+    padding: 0 0 0 15px;
+    margin: 5px 0;
+    border-left: 2px solid rgb(156, 78, 230);
+    transition: none;
+    opacity: 1;
+    transform: none;
+}
+
+#mobile_menu .dropdown-menu li a {
+    padding: 8px 15px;
+}
+
+#mobile_menu .dropdown-menu li a:hover {
+    background-color: rgba(156, 78, 230, 0.05);
+}

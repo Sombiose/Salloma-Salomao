@@ -1,0 +1,139 @@
+/* Estilos para a seção home */
+#home {
+    position: relative;
+    width: 100%;
+    height: calc(125vh - 126px); /* Ajustando para o cabeçalho */
+    overflow: hidden;
+    margin-bottom: -400px;
+}
+
+/* Estilo para a imagem como plano de fundo em tela cheia */
+#home img {
+    position: absolute;
+    width: 100%;
+    height: 60%;
+    object-fit: cover; /* Garante que a imagem cubra todo o espaço */
+    top: 0;
+    left: 0;
+    z-index: 1; /* Define a camada da imagem */
+}
+
+/* Overlay opcional para melhorar contraste do texto */
+#home::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3); /* Ajuste a opacidade conforme necessário */
+    z-index: 1; /* Entre a imagem e o texto */
+}
+
+/* Estilos para o container do título e subtítulo */
+#cta {
+    position: absolute;
+    top: 53%;
+    left: 10%;
+    transform: translateY(-50%); /* Centraliza verticalmente */
+    z-index: 2; /* Garante que fique acima da imagem */
+    width: 80%; /* Limita a largura do conteúdo */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    text-align: center;
+    height: 10%;
+}
+
+/* Estilo para o título */
+#cta .title {
+    font-size: clamp(2rem, 5vw, 3rem); /* Responsivo */
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    line-height: 1.2;
+}
+
+/* Destaque no título */
+#cta .title span {
+    color: rgb(244, 139, 10);
+    
+}
+
+/* Estilo para o subtítulo */
+#cta .description {
+    font-size: clamp(1.2rem, 3vw, 1.8rem); /* Responsivo */
+    color: aliceblue;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    
+}
+
+/* Estilos para os botões do CTA */
+#cta_buttons {
+    margin-top: 15px;
+    max-width: 15%;
+    
+}
+
+/* Estilo para os botões de redes sociais */
+.social-media-buttons {
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    z-index: 3; /* Acima de todos os outros elementos */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Estilo para cada botão de rede social */
+.social-media-buttons a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: clamp(35px, 5vw, 45px);
+    height: clamp(35px, 5vw, 45px);
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    color: #411e00;
+    font-size: clamp(1rem, 1.5vw, 1.3rem);
+    text-decoration: none;
+    box-shadow: 0px 0px 12px 4px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.social-media-buttons a:hover {
+    transform: translateY(-5px);
+    background: rgb(244, 139, 10);
+    color: white;
+}
+
+/* Media queries para diferentes tamanhos de tela */
+@media screen and (max-width: 768px) {
+    #cta {
+        left: 5%;
+        width: 100%;
+        height: 12%;
+        align-items: center;
+    }
+    
+    .social-media-buttons {
+        top: 3%;
+        right: 3%;
+        gap: 10px;
+    }
+}
+
+/* Para telas muito pequenas */
+@media screen and (max-width: 480px) {
+    #cta {
+        top: 55%; /* Ajuste para dispositivos móveis */
+    }
+    
+    /* Opcionalmente, ajustar a direção dos botões sociais para horizontal em telas pequenas */
+    .social-media-buttons {
+        flex-direction: row;
+        top: 2%;
+        right: 2%;
+    }
+}
