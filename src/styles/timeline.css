@@ -1,6 +1,6 @@
 /* Estilos para a seção da Linha do Tempo */
 #tempo {
-    background-color: #710000; /* Fundo vermelho escuro */
+    background-color: #710000;
     padding: 50px 8%;
     z-index: 1;
     position: relative;
@@ -8,7 +8,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow: hidden; /* Para evitar que os círculos saiam da seção */
+    overflow: hidden;
 }
 
 .timeline-container {
@@ -24,7 +24,7 @@
     margin-bottom: 15px;
     text-align: center;
     position: relative;
-    z-index: 7; /* Para ficar acima dos círculos */
+    z-index: 7;
 }
 
 .section-description {
@@ -33,13 +33,14 @@
     margin-bottom: 50px;
     text-align: center;
     position: relative;
-    z-index: 7; /* Para ficar acima dos círculos */
+    z-index: 7;
+    max-width: 90%;
 }
 
 #timeline-spiral-container {
     position: relative;
     width: 100%;
-    height: 700px; /* Altura aumentada para acomodar a espiral */
+    height: 700px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -50,29 +51,28 @@
 /* Estilos para os círculos */
 .timeline-dot {
     position: absolute;
-    background-color: #bbff00; /* Círculos amarelos como na versão original */
-    width: 10px; /* 3mm aproximadamente */
-    height: 10px; /* 3mm aproximadamente */
+    background-color: #bbff00;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
     transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
     cursor: default;
-    transform: translate(-50%, -50%); /* Centraliza o círculo na sua posição */
+    transform: translate(-50%, -50%);
 }
 
-/* Para os círculos que fazem parte da linha do tempo */
 .timeline-dot.interactive {
-    background-color: #ffffff; /* Círculos interativos são brancos como na versão original */
+    background-color: #ffffff;
     cursor: pointer;
-    z-index: 10; /* Para ficar acima dos outros círculos */
-    box-shadow: 0 0 15px 3px rgba(255, 255, 255, 0.5); /* Sombra para destacar os círculos interativos */
+    z-index: 10;
+    box-shadow: 0 0 15px 3px rgba(255, 255, 255, 0.5);
 }
 
 .timeline-dot.interactive:hover {
-    transform: translate(-50%, -50%) scale(2.5); /* Mantém a centralização ao escalar */
-    box-shadow: 0 0 25px 5px rgba(255, 255, 255, 0.9); /* Sombra mais intensa no hover */
+    transform: translate(-50%, -50%) scale(2.5);
+    box-shadow: 0 0 25px 5px rgba(255, 255, 255, 0.9);
 }
 
-/* Texto do ano que aparece ao passar o mouse */
+/* Texto do ano */
 .year-label {
     position: absolute;
     color: #ffffff;
@@ -81,9 +81,9 @@
     opacity: 0;
     transition: opacity 0.3s ease;
     pointer-events: none;
-    text-shadow: 0.8px 0.8px 0.8px rgba(3, 2, 2, 0.8);
-    z-index: 15; /* Para ficar acima dos círculos */
-    left: 20px; /* Posição à direita do círculo */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    z-index: 15;
+    left: 20px;
     top: -5px;
 }
 
@@ -103,6 +103,7 @@
     z-index: 100;
     justify-content: center;
     align-items: center;
+    padding: 10px;
 }
 
 .modal-content {
@@ -172,19 +173,216 @@
     font-size: 1.1rem;
 }
 
-/* Media queries para responsividade */
+/* ============================================
+   MEDIA QUERIES - RESPONSIVIDADE
+   ============================================ */
+
+/* Tablets e telas médias */
+@media screen and (max-width: 1024px) {
+    #tempo {
+        padding: 45px 6%;
+    }
+    
+    .section-title {
+        font-size: 2.2rem;
+    }
+    
+    .section-description {
+        font-size: 1.1rem;
+    }
+    
+    #timeline-spiral-container {
+        height: 600px;
+    }
+}
+
+/* Celulares em landscape e tablets pequenos */
 @media screen and (max-width: 768px) {
+    #tempo {
+        padding: 40px 5%;
+        min-height: auto;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+        margin-bottom: 12px;
+    }
+    
+    .section-description {
+        font-size: 1rem;
+        margin-bottom: 30px;
+        padding: 0 5%;
+        line-height: 1.5;
+    }
+    
     #timeline-spiral-container {
         height: 500px;
+        width: 100%;
+    }
+    
+    .timeline-dot {
+        width: 8px;
+        height: 8px;
+    }
+    
+    .timeline-dot.interactive {
+        width: 10px;
+        height: 10px;
+    }
+    
+    .year-label {
+        font-size: 0.65rem;
+        left: 15px;
+    }
+    
+    .modal {
+        padding: 15px;
     }
     
     .modal-content {
-        width: 90%;
-        padding: 15px;
+        width: 95%;
+        padding: 20px;
+        max-height: 90vh;
     }
     
     .modal-body {
         flex-direction: column;
+        gap: 15px;
+    }
+    
+    #modal-image {
+        max-height: 300px;
+    }
+    
+    #modal-year {
+        font-size: 1.6rem;
+        margin-bottom: 15px;
+    }
+    
+    .modal-text {
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+}
+
+/* Celulares em portrait */
+@media screen and (max-width: 480px) {
+    #tempo {
+        padding: 30px 4%;
+        min-height: auto;
+    }
+    
+    .section-title {
+        font-size: 1.7rem;
+        margin-bottom: 10px;
+    }
+    
+    .section-description {
+        font-size: 0.9rem;
+        margin-bottom: 25px;
+        padding: 0;
+        line-height: 1.4;
+    }
+    
+    #timeline-spiral-container {
+        height: 400px;
+    }
+    
+    .timeline-dot {
+        width: 7px;
+        height: 7px;
+    }
+    
+    .timeline-dot.interactive {
+        width: 9px;
+        height: 9px;
+    }
+    
+    .timeline-dot.interactive:hover {
+        transform: translate(-50%, -50%) scale(2.2);
+    }
+    
+    .year-label {
+        font-size: 0.6rem;
+        left: 12px;
+        top: -3px;
+    }
+    
+    .modal {
+        padding: 10px;
+    }
+    
+    .modal-content {
+        width: 98%;
+        padding: 18px;
+        border-radius: 10px;
+        max-height: 92vh;
+    }
+    
+    #modal-year {
+        font-size: 1.4rem;
+        margin-bottom: 12px;
+        padding-bottom: 8px;
+    }
+    
+    .modal-image-container {
+        margin-bottom: 10px;
+    }
+    
+    #modal-image {
+        max-height: 250px;
+    }
+    
+    .modal-text {
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+    
+    .close-modal {
+        font-size: 24px;
+        top: 10px;
+        right: 10px;
+    }
+}
+
+/* Celulares pequenos */
+@media screen and (max-width: 360px) {
+    #tempo {
+        padding: 25px 3%;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+    }
+    
+    .section-description {
+        font-size: 0.85rem;
+    }
+    
+    #timeline-spiral-container {
+        height: 350px;
+    }
+    
+    .timeline-dot {
+        width: 6px;
+        height: 6px;
+    }
+    
+    .timeline-dot.interactive {
+        width: 8px;
+        height: 8px;
+    }
+    
+    .year-label {
+        font-size: 0.55rem;
+    }
+    
+    .modal-content {
+        padding: 15px;
+    }
+    
+    #modal-year {
+        font-size: 1.2rem;
     }
     
     #modal-image {
@@ -192,9 +390,36 @@
     }
 }
 
+/* Orientação landscape em celulares */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    #tempo {
+        padding: 25px 5%;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+        margin-bottom: 8px;
+    }
+    
+    .section-description {
+        font-size: 0.85rem;
+        margin-bottom: 20px;
+    }
+    
+    #timeline-spiral-container {
+        height: 300px;
+    }
+    
+    .modal-content {
+        max-height: 95vh;
+    }
+}
+
+/* Desktop médio */
 @media screen and (min-width: 769px) and (max-width: 1200px) {
     .modal-body {
         flex-direction: row;
+        gap: 25px;
     }
     
     .modal-image-container {
